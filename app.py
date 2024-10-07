@@ -11,6 +11,11 @@ CORS(app)  # Enable CORS for all routes
 # Load model (make sure your .keras model file is in the correct path)
 model = tf.keras.models.load_model("./models/trained_plant_disease_model.keras")
 
+# Homepage route to display a welcome message
+@app.route('/', methods=['GET'])
+def home():
+    return jsonify({"message": "Welcome to the Plant Disease Detection API!"}), 200
+
 # Function for prediction
 def model_prediction(image_bytes):
     image = Image.open(io.BytesIO(image_bytes)).resize((128, 128))
